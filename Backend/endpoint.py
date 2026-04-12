@@ -1,0 +1,26 @@
+import json
+from http import HTTPStatus
+
+from fastapi import APIRouter
+from pydantic import BaseModel
+from starlette.responses import Response
+
+router = APIRouter()
+
+class EventSchema(BaseModel):
+    """event schema - change accordingly"""
+
+    event_id: str
+    event_type: str
+
+
+@router.post("/", dependencies=[])
+def handle_event(
+    data: EventSchema,
+) -> Response:
+    print(data)
+
+    return Response(
+        content = json.dump({"message": "Data received!"}),
+        status_code=HTTPStatus.ACCEPTED,
+    )
