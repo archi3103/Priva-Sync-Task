@@ -1,24 +1,15 @@
 import requests
 import json
 import uuid
-
+from main import app
+from fastapi.params import Body
 
 def send_test_event():
     # API endpoint URL (adjust if your server runs on a different port)
     url = "http://localhost:8000/events/"
 
-    # Sample event data
-    # event_data = {
-    #     "event_id": str(uuid.uuid4()),  # Generate a random UUID
-    #     "event_type": "test_event",
-    #     "event_data": {
-    #         "message": "Can you explain how to use FastAPI?",
-    #     },
-    # }
-
     # prompt = "Explain the importance of fast language models"
     prompt = "what is fastapi, give answer for a beginner"
-
 
     # Headers for JSON content
     headers = {
@@ -45,5 +36,4 @@ def send_test_event():
 
 if __name__ == "__main__":
     send_test_event()
-
 

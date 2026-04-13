@@ -11,10 +11,6 @@ router = APIRouter()
 
 class EventSchema(BaseModel):
     """event schema - change accordingly"""
-
-    # event_id: str
-    # event_type: str
-    # event_data: dict
     prompt: str
 
 
@@ -29,3 +25,5 @@ def handle_event(
         content = json.dumps({"message": output}),
         status_code=HTTPStatus.ACCEPTED,
     )
+
+
