@@ -5,22 +5,27 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from starlette.responses import Response
 
+from api import calling
+
 router = APIRouter()
 
 class EventSchema(BaseModel):
     """event schema - change accordingly"""
 
-    event_id: str
-    event_type: str
+    # event_id: str
+    # event_type: str
+    # event_data: dict
+    prompt: str
 
 
 @router.post("/", dependencies=[])
 def handle_event(
     data: EventSchema,
 ) -> Response:
-    print(data)
+    # print(data)
+    output = calling(data.prompt)
 
     return Response(
-        content = json.dump({"message": "Data received!"}),
+        content = json.dumps({"message": output}),
         status_code=HTTPStatus.ACCEPTED,
     )

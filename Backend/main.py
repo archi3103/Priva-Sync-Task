@@ -1,4 +1,4 @@
-from fastapi import FASTAPI
+from fastapi import FastAPI
 from router import router as process_router
 
 app = FastAPI()
