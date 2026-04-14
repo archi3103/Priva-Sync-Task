@@ -18,13 +18,27 @@ submit_btn.addEventListener('click', async(e)=>{
     const result = await response.json()
 
     const prompt_response = document.getElementById("response")
-    if (prompt_response) {
-        prompt_response.innerHTML = result.message
+    prompt_response.innerHTML = result.message
 
-    }
-    else{
-        console.error("oops")
-    }
-
-    alert(result.message)
+    // alert(result.message)
 })
+
+const token = localStorage.getItem("token")
+
+const auth = await fetch("http://127.0.0.1:8000/events/uses/me", {
+    method: "GET",
+    headers: {
+        "Accept": "application/json",
+        "Authorization": "Bearer " + token
+    }
+})
+
+if (auth.ok) {
+    const userdata = await auth.json()
+    alert("welocome" + userdata.username)
+}
+
+else{
+    alert("unauthorized")
+    window.location.href = "login.html"
+}

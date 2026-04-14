@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-from router import router as process_router
+from router import router as main_hub
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-app.include_router(process_router)
+app.include_router(main_hub)
 
 
 app.add_middleware(

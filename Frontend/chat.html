@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div class="input">
+                <textarea id="prompt" placeholder="Type your prompt here" required></textarea>
+                <!-- <input type="text" id="prompt" name="prompt" placeholder="Type your prompt here" required> -->
+                <button type="submit" id="submit-btn"> &#10140; </button>
+            </div>
+        </form>
+        <div class="res-container">
+            <div id="response">
+                <i> Response will appear here...</i>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="/Frontend/chat.js" defer></script>
+</body>
+</html>
