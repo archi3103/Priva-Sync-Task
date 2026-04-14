@@ -3,7 +3,7 @@ const login_btn = document.getElementById('login-btn')
 const username = document.getElementById('username')
 const password = document.getElementById('password')
 
-
+console.log("connected")
 async function sendData() {
     const params = new URLSearchParams()
     params.append("username", username.value);
@@ -26,7 +26,7 @@ async function sendData() {
             window.location.href = "chat.html"
         }
         else{
-            alert("oops")
+            alert("Invalid Credentials!")
         }
     }
     catch (e) {
@@ -34,11 +34,9 @@ async function sendData() {
     }
 }
 
-console.log(login_btn)
 login_btn.addEventListener('click', (e) => {
-    alert("skdfj ");
     e.preventDefault()
-    alert("hii")
     sendData()
 })
+
 

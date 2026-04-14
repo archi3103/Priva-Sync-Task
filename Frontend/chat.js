@@ -1,5 +1,7 @@
-const form = document.querySelector('form')
+// alert("me is useless")
+// const form = document.querySelector('form')
 const submit_btn = document.querySelector('#submit-btn')
+const name = document.getElementById('name')
 
 submit_btn.addEventListener('click', async(e)=>{
     e.preventDefault();
@@ -23,22 +25,27 @@ submit_btn.addEventListener('click', async(e)=>{
     // alert(result.message)
 })
 
-const token = localStorage.getItem("token")
 
-const auth = await fetch("http://127.0.0.1:8000/events/uses/me", {
-    method: "GET",
-    headers: {
-        "Accept": "application/json",
-        "Authorization": "Bearer " + token
+async function check (token, name) {
+    const auth = await fetch("http://127.0.0.1:8000/users/me", {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Authorization": "Bearer " + token
+        }
+    })
+
+    if (auth.ok) {
+        const userdata = await auth.json()
+        alert("welcome " + userdata.username)
+        name.innerHTML = userdata.username
     }
-})
 
-if (auth.ok) {
-    const userdata = await auth.json()
-    alert("welocome" + userdata.username)
+    else{
+        alert("unauthorized")
+        window.location.href = "login.html"
+    }
 }
 
-else{
-    alert("unauthorized")
-    window.location.href = "login.html"
-}
+const token = localStorage.getItem("token")
+check(token, name)
