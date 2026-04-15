@@ -18,7 +18,6 @@ submit_btn.addEventListener('click', async(e)=>{
         }),
     })
     const result = await response.json()
-
     const prompt_response = document.getElementById("response")
     prompt_response.innerHTML = result.message
 

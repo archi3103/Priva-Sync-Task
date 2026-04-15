@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from router import router as main_hub
 from fastapi.middleware.cors import CORSMiddleware
 
+# import configurations
+
 app = FastAPI()
 app.include_router(main_hub)
 
