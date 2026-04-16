@@ -7,6 +7,21 @@ from fastapi import FastAPI, Depends, HTTPException, APIRouter
 
 from pwdlib import PasswordHash
 
+
+from datetime import datetime, timedelta, timezone
+from typing import Annotated
+
+import jwt
+from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from jwt.exceptions import InvalidTokenError
+from pwdlib import PasswordHash
+from pydantic import BaseModel
+from fastapi import APIRouter
+
+import os
+from dotenv import load_dotenv
+
 router = APIRouter()
 
 
@@ -17,14 +32,14 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 # Database model
-class User(Base):
+class Users(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, index=True, unique=True)
     email = Column(String, unique=True, index=True)
     full_name = Column(String)
     hashed_password = Column(String)
-    disabled = Column(Boolean, default=True)
+    disabled = Column(Boolean, default=False)
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -36,6 +51,8 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# db_dependency = Annotated[Session, Depends(get_db)]
 
 class UserCreate(BaseModel):
     username: str
@@ -52,10 +69,10 @@ class UserResponse(BaseModel):
 password_hash = PasswordHash.recommended()
 
 # API endpoint to create an item
-@router.post("/users/", response_model = UserResponse)
+@router.post("/userdb/", response_model = UserResponse)
 async def create_user(user: UserCreate, db: Session = Depends(get_db)):
     # db_user = User(**user.dict())
-    db_user = User(
+    db_user = Users(
         username = user.username,
         email = user.email,
         full_name = user.full_name,
@@ -69,9 +86,12 @@ async def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
 
 # API endpoint to read an item by ID
-@router.get("/users/{user_id}", response_model=UserResponse)
+@router.get("/userdb/{user_id}", response_model=UserResponse)
 async def read_user(user_id: int, db: Session = Depends(get_db)):
-    db_user = db.query(User).filter(User.id == user_id).first()
+    db_user = db.query(Users).filter(Users.id == user_id).first()
     if db_user is None:
         raise HTTPException(status_code=404, detail="Item not found")
     return db_user
+
+
+

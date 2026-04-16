@@ -22,7 +22,7 @@ async function sendData() {
 
         if (response.ok) {
             localStorage.setItem("token", token.access_token)
-            alert("redirecting")
+            // alert("redirecting")
             window.location.href = "chat.html"
         }
         else{
