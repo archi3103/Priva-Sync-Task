@@ -46,6 +46,17 @@ body{
     margin: 2vh auto;
 }
 
+#login-btn {
+    background-color: #2977F5;
+    cursor: pointer;
+    border-radius: 10px;
+    height: 5vh;
+    width: 10vh;
+    display: block;
+    margin: 2vh auto;
+    margin-left: 5vh;
+}
+
 
 .input-box input{
     width:100%;
@@ -53,4 +64,10 @@ body{
     box-sizing: border-box;
     margin: 1vh 2vh;
     border-radius: 10px;
+}
+
+.buttons{
+    display: flex;
+    /* gap: 3vh; */
+    justify-content: center;
 }

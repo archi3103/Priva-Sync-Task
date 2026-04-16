@@ -1,11 +1,13 @@
 // alert("yaar")
 
 const signup_btn = document.querySelector("#signup-btn")
+const login_btn = document.querySelector("#login-btn")
 const username = document.getElementById('username')
 const password = document.getElementById('password')
 const email = document.getElementById('email')
 const full_name = document.getElementById('full_name')
 const conf_password = document.getElementById('confirm-password')
+
 
 async function sendData() {
     const user_data = {
@@ -49,4 +51,9 @@ signup_btn.addEventListener('click', (e) => {
     else {
         sendData()
     }
+})
+
+login_btn.addEventListener('click', (e) => {
+    e.preventDefault()
+    window.location.href = "login.html"
 })
